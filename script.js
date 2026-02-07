@@ -81,15 +81,4 @@ function showAnswer() {
 btnCheck.addEventListener('click', checkPuzzle);
 btnShowAnswer.addEventListener('click', showAnswer);
 
-const puzzle = [
-    "##########",
-    "#КОТ######",
-    "#О#СОБАКА#",
-    "#Т#О######",
-    "##########",
-    "###ЛЕВ####",
-    "###Е######",
-    "###В######",
-    "##########",
-    "##########"
 
