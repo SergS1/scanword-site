@@ -1,5 +1,3 @@
-/* styles.css */
-
 /* Общие настройки */
 * {
     box-sizing: border-box;
@@ -16,10 +14,8 @@ body {
     color: #222;
     display: flex;
     flex-direction: column;
-    overflow-x: auto; /* чтобы было куда скроллить, если сетка шире экрана */
 }
 
-/* Шапка и подвал */
 .site-header, .site-footer {
     background: rgba(0, 0, 0, 0.8);
     color: #fff;
@@ -35,26 +31,22 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    gap: 10px;
+    padding: 10px 20px;
 }
 
-/* Информация о кроссворде */
-.puzzle-info {
-    text-align: center;
-    color: #ffffff;
-    text-shadow: 0 0 4px rgba(0,0,0,0.6);
-}
-
-/* Контейнер сетки и кнопок */
-.puzzle-container {
-    display: flex;
+/* Основной двухколоночный лэйаут */
+.puzzle-layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: auto minmax(320px, 420px);
+    gap: 30px;
     align-items: flex-start;
-    justify-content: center;
-    gap: 20px;
-    width: 100%;
-    max-width: 1400px;
+}
+
+/* Левая колонка — сетка */
+.puzzle-grid-wrapper {
+    display: flex;
+    justify-content: flex-start;
 }
 
 /* Сетка кроссворда */
@@ -79,7 +71,7 @@ body {
     border: 1px solid #000000;
 }
 
-/* Закрашенная клетка (нет буквы) */
+/* Закрашенная клетка */
 .puzzle-cell.blocked {
     background: #000000;
 }
@@ -101,7 +93,6 @@ body {
     height: 100%;
     border: none;
     text-align: center;
-    /* авто‑подбор размера для десктопов/планшетов */
     font-size: clamp(12px, 2.6vmin, 22px);
     line-height: 1;
     padding: 0;
@@ -111,26 +102,41 @@ body {
     color: #000;
 }
 
-/* Фокус клетки */
 .puzzle-cell input:focus {
     outline: none;
     box-shadow: inset 0 0 6px 2px rgba(0, 255, 255, 0.7);
 }
 
-/* Ошибка */
+/* Ошибки/правильные */
 .puzzle-cell.wrong input {
     background: #ffcccc;
 }
 
-/* Правильно */
 .puzzle-cell.correct input {
     background: #ccffcc;
 }
 
-/* Боковая панель с кнопками */
+/* Правая колонка */
+.puzzle-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.puzzle-info {
+    background: rgba(255,255,255,0.85);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+.puzzle-info h2 {
+    margin-top: 0;
+}
+
+/* Кнопки */
 .puzzle-controls {
-    min-width: 190px;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.9);
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
@@ -154,21 +160,19 @@ button:hover {
     background: #1b2733;
 }
 
-/* Сообщение о результате */
 #result-message {
     min-height: 20px;
     font-size: 14px;
 }
 
-/* Блок с вопросами */
+/* Вопросы */
 .puzzle-clues {
-    width: 100%;
-    max-width: 1400px;
     background: rgba(255, 255, 255, 0.85);
-    margin-top: 10px;
     padding: 10px 15px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    max-height: 320px;
+    overflow-y: auto;
 }
 
 .puzzle-clues h3 {
@@ -191,102 +195,54 @@ button:hover {
     background: rgba(0, 255, 0, 0.3);
 }
 
-/* Подсветка всех клеток выбранного слова */
+/* Подсветка слова в сетке */
 .puzzle-cell.active-word input {
     background: rgba(0, 255, 0, 0.3);
 }
 
-/* ------- АДАПТАЦИЯ ПОД ПЛАНШЕТЫ ------- */
+/* Планшеты */
 @media (max-width: 1024px) {
-    .puzzle-container {
-        gap: 12px;
+    .puzzle-layout {
+        grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+        gap: 20px;
     }
 
     .puzzle-grid {
-        width: min(100vw, 640px);
-    }
-
-    .puzzle-controls {
-        min-width: 170px;
+        width: min(100vw - 220px, 640px);
     }
 
     .puzzle-cell input {
-        /* чуть меньше максимум на планшетах */
         font-size: clamp(12px, 2.4vmin, 20px);
     }
 }
 
-/* ------- АДАПТАЦИЯ ПОД ТЕЛЕФОНЫ ------- */
+/* Телефоны: возвращаем старую колонку */
 @media (max-width: 700px) {
-    .site-header, .site-footer {
-        padding: 10px;
-    }
-
-    .site-header h1 {
-        font-size: 20px;
-    }
-
-    .puzzle-info p {
-        margin: 4px 0;
-        font-size: 14px;
-    }
-
-    .puzzle-container {
+    .puzzle-layout {
+        display: flex;
         flex-direction: column;
-        align-items: flex-start; /* чтобы сетка могла выходить за экран и скроллиться */
+        gap: 15px;
+    }
+
+    .puzzle-grid-wrapper {
         overflow-x: auto;
     }
 
-    /* Фиксированный размер клеток — сетка может быть шире экрана и скроллится */
     .puzzle-grid {
-        width: 560px; /* 20 колонок * 28px */
+        width: 560px;
         grid-template-columns: repeat(20, 28px);
         grid-auto-rows: 28px;
     }
 
-    .puzzle-controls {
-        width: 100%;
-        max-width: 400px;
-        min-width: 0;
-    }
-
-    button {
-        font-size: 13px;
-        padding: 7px;
-    }
-
-    .puzzle-clues {
-        font-size: 14px;
-        max-height: 260px;
-        overflow-y: auto;
-    }
-
-    /* авто‑подбор для телефонов: поменьше максимум, не режется */
     .puzzle-cell input {
         font-size: clamp(11px, 4.2vw, 16px);
-        line-height: 1;
-        padding: 0;
     }
 }
 
-/* Совсем маленькие экраны */
 @media (max-width: 480px) {
-    .site-header h1 {
-        font-size: 18px;
-    }
-
-    .clue-number {
-        font-size: 9px;
-    }
-
-    .puzzle-info h2 {
-        font-size: 18px;
-    }
-
-    /* ещё аккуратнее для очень маленьких экранов */
     .puzzle-cell input {
         font-size: clamp(10px, 4.8vw, 14px);
-        line-height: 1;
-        padding: 0;
     }
 }
+
+
