@@ -12,11 +12,11 @@ html, body {
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    /* Голубой «красочный» фон */
     background: linear-gradient(135deg, #87cefa, #1e90ff, #b0e0e6);
     color: #222;
     display: flex;
     flex-direction: column;
+    overflow-x: auto; /* чтобы было куда скроллить, если сетка шире экрана */
 }
 
 /* Шапка и подвал */
@@ -57,7 +57,7 @@ body {
     max-width: 1400px;
 }
 
-/* Сетка кроссворда — чёрная рамка и сетка */
+/* Сетка кроссворда */
 .puzzle-grid {
     display: grid;
     background: #000;
@@ -66,21 +66,20 @@ body {
     border: 3px solid #000;
     box-shadow: 0 0 20px rgba(0,0,0,0.7);
 
-    /* Базово — 20 колонок, JS переопределяет под фактический размер */
+    /* 20 колонок, на больших экранах растягиваются */
     grid-template-columns: repeat(20, 1fr);
     grid-auto-rows: 1fr;
 
-    /* Занимает большую часть экрана */
-    width: 90vmin;
-    max-width: 100%;
-    max-height: calc(100vh - 220px);
+    /* ограничиваем общую ширину, чтобы на десктопе было красиво,
+       но не давим клетки на мобильном — ниже будет override */
+    width: min(90vmin, 640px);
 }
 
 /* Клетка */
 .puzzle-cell {
     background: #ffffff;
     position: relative;
-    border: 1px solid #000000; /* чёрная сетка */
+    border: 1px solid #000000;
 }
 
 /* Закрашенная клетка (нет буквы) */
@@ -186,12 +185,106 @@ button:hover {
     border-bottom: 1px dashed rgba(0,0,0,0.15);
 }
 
-/* Подсветка выбранного вопроса зелёным полупрозрачным цветом */
+/* Подсветка выбранного вопроса */
 .puzzle-clues li.active-clue {
     background: rgba(0, 255, 0, 0.3);
 }
 
-/* Подсветка всех клеток выбранного слова тем же зелёным цветом */
+/* Подсветка всех клеток выбранного слова */
 .puzzle-cell.active-word input {
     background: rgba(0, 255, 0, 0.3);
 }
+
+/* ------- АДАПТАЦИЯ ПОД ПЛАНШЕТЫ ------- */
+@media (max-width: 1024px) {
+    .puzzle-container {
+        gap: 12px;
+    }
+
+    .puzzle-grid {
+        width: min(100vw, 640px);
+        /* убираем ограничение по высоте, чтобы клетки не сплющивались
+           при появлении клавиатуры */
+    }
+
+    .puzzle-controls {
+        min-width: 170px;
+    }
+
+    .puzzle-cell input {
+        font-size: 16px;
+    }
+}
+
+/* ------- АДАПТАЦИЯ ПОД ТЕЛЕФОНЫ ------- */
+@media (max-width: 700px) {
+    .site-header, .site-footer {
+        padding: 10px;
+    }
+
+    .site-header h1 {
+        font-size: 20px;
+    }
+
+    .puzzle-info p {
+        margin: 4px 0;
+        font-size: 14px;
+    }
+
+    .puzzle-container {
+        flex-direction: column;
+        align-items: flex-start; /* чтоб сетка могла выходить за экран и скроллиться */
+        overflow-x: auto;
+    }
+
+    /* На телефоне даём фиксированный размер клетки,
+       чтобы буква была крупной и читаемой.
+       Сетка станет шире экрана, но её можно будет тянуть вбок. */
+    .puzzle-grid {
+        width: 560px; /* 20 колонок * 28px */
+        grid-template-columns: repeat(20, 28px);
+        grid-auto-rows: 28px;
+    }
+
+    .puzzle-controls {
+        width: 100%;
+        max-width: 400px;
+        min-width: 0;
+    }
+
+    button {
+        font-size: 13px;
+        padding: 7px;
+    }
+
+    .puzzle-clues {
+        font-size: 14px;
+        max-height: 260px;
+        overflow-y: auto;
+    }
+
+    .puzzle-cell input {
+        font-size: 18px; /* буквы крупнее */
+    }
+}
+
+/* Совсем маленькие экраны */
+@media (max-width: 480px) {
+    .site-header h1 {
+        font-size: 18px;
+    }
+
+    .puzzle-cell input {
+        font-size: 18px;
+    }
+
+    .clue-number {
+        font-size: 9px;
+    }
+
+    .puzzle-info h2 {
+        font-size: 18px;
+    }
+}
+
+
