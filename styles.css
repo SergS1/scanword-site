@@ -165,46 +165,67 @@ button:hover {
     font-size: 14px;
 }
 
-/* Вопросы (общий стиль, теперь используется для нижнего блока) */
-.puzzle-clues,
-.puzzle-clues-bottom {
+/* Вопросы */
+.puzzle-clues {
     background: rgba(255, 255, 255, 0.85);
     padding: 10px 15px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
     max-height: 320px;
     overflow-y: auto;
-    margin-top: 20px;
 }
 
-.puzzle-clues h3,
-.puzzle-clues-bottom h3 {
+.puzzle-clues h3 {
     margin-top: 0;
 }
 
-.puzzle-clues ul,
-.puzzle-clues-bottom ul {
+.puzzle-clues ul {
     list-style: none;
     padding-left: 0;
     margin: 0;
 }
 
-.puzzle-clues li,
-.puzzle-clues-bottom li {
+.puzzle-clues li {
     padding: 4px 6px;
     border-bottom: 1px dashed rgba(0,0,0,0.15);
-    cursor: pointer;
 }
 
 /* Подсветка выбранного вопроса */
-.puzzle-clues li.active-clue,
-.puzzle-clues-bottom li.active-clue {
+.puzzle-clues li.active-clue {
     background: rgba(0, 255, 0, 0.3);
 }
 
 /* Подсветка слова в сетке */
 .puzzle-cell.active-word input {
     background: rgba(0, 255, 0, 0.3);
+}
+
+/* Блок вопросов на всю ширину */
+.puzzle-clues-full {
+    max-width: none;
+    margin-top: 20px;
+}
+
+/* Панель выбранного вопроса (большой блок в сайдбаре) */
+.active-clue-panel {
+    background: rgba(255, 255, 255, 0.55);
+    border: 4px solid #000;
+    border-radius: 6px;
+    min-height: 260px;
+    padding: 14px 16px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.35);
+}
+
+.active-clue-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.active-clue-text {
+    font-size: 16px;
+    line-height: 1.5;
+    white-space: pre-wrap;
 }
 
 /* Планшеты */
@@ -223,7 +244,7 @@ button:hover {
     }
 }
 
-/* Телефоны: одна колонка */
+/* Телефоны: колонка */
 @media (max-width: 700px) {
     .puzzle-layout {
         display: flex;
@@ -251,25 +272,3 @@ button:hover {
         font-size: clamp(10px, 4.8vw, 14px);
     }
 }
-/* Панель выбранного вопроса (как на скриншоте — большой блок снизу справа) */
-.active-clue-panel {
-    background: rgba(255, 255, 255, 0.55);
-    border: 4px solid #000;
-    border-radius: 6px;
-    min-height: 260px;
-    padding: 14px 16px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.35);
-}
-
-.active-clue-title {
-    font-weight: bold;
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-
-.active-clue-text {
-    font-size: 16px;
-    line-height: 1.5;
-    white-space: pre-wrap;
-}
-
