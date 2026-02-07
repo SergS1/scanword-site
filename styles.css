@@ -165,33 +165,40 @@ button:hover {
     font-size: 14px;
 }
 
-/* Вопросы */
-.puzzle-clues {
+/* Вопросы (общий стиль, теперь используется для нижнего блока) */
+.puzzle-clues,
+.puzzle-clues-bottom {
     background: rgba(255, 255, 255, 0.85);
     padding: 10px 15px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
     max-height: 320px;
     overflow-y: auto;
+    margin-top: 20px;
 }
 
-.puzzle-clues h3 {
+.puzzle-clues h3,
+.puzzle-clues-bottom h3 {
     margin-top: 0;
 }
 
-.puzzle-clues ul {
+.puzzle-clues ul,
+.puzzle-clues-bottom ul {
     list-style: none;
     padding-left: 0;
     margin: 0;
 }
 
-.puzzle-clues li {
+.puzzle-clues li,
+.puzzle-clues-bottom li {
     padding: 4px 6px;
     border-bottom: 1px dashed rgba(0,0,0,0.15);
+    cursor: pointer;
 }
 
 /* Подсветка выбранного вопроса */
-.puzzle-clues li.active-clue {
+.puzzle-clues li.active-clue,
+.puzzle-clues-bottom li.active-clue {
     background: rgba(0, 255, 0, 0.3);
 }
 
@@ -216,7 +223,7 @@ button:hover {
     }
 }
 
-/* Телефоны: возвращаем старую колонку */
+/* Телефоны: одна колонка */
 @media (max-width: 700px) {
     .puzzle-layout {
         display: flex;
@@ -244,5 +251,3 @@ button:hover {
         font-size: clamp(10px, 4.8vw, 14px);
     }
 }
-
-
