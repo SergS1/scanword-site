@@ -2,48 +2,50 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Сканворды онлайн</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сканворд №1</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="site-header">
-        <h1>Сканворды онлайн</h1>
-        <p>Решайте сканворды прямо в браузере</p>
-    </header>
+<header class="site-header">
+    <h1>Сканворд №1</h1>
+</header>
 
-    <main class="site-main">
-        <section class="puzzle-info">
-            <h2>Сканворд №1</h2>
-            <p>Тема: Еда и напитки</p>
-            <p>В этом кроссворде 30 слов по горизонтали и вертикали.</p>
-            <p>Вводите буквы в клетки — курсор сам переходит к следующей.</p>
-        </section>
+<main class="site-main">
+    <div class="puzzle-layout">
+        <!-- Левая колонка: только сетка -->
+        <div class="puzzle-grid-wrapper">
+            <div id="puzzle-grid" class="puzzle-grid"></div>
+        </div>
 
-        <section class="puzzle-container">
-            <div id="puzzle-grid" class="puzzle-grid">
-                <!-- Сюда JavaScript вставит клетки кроссворда -->
-            </div>
+        <!-- Правая колонка: тема, описание, кнопки, вопросы -->
+        <div class="puzzle-sidebar">
+            <section class="puzzle-info">
+                <h2>Тема: Еда и напитки</h2>
+                <p>В этом кроссворде 30 слов по горизонтали и вертикали.</p>
+                <p>Вводите буквы в клетки — курсор сам переходит к следующей.</p>
+            </section>
 
-            <aside class="puzzle-controls">
-                <button id="btn-check">Проверить</button>
-                <button id="btn-show-answer">Показать ответ</button>
-                <p id="result-message"></p>
-            </aside>
-        </section>
+            <section class="puzzle-controls">
+                <button id="check-button">Проверить</button>
+                <button id="hint-button">Подсказка</button>
+                <div id="result-message"></div>
+            </section>
 
-        <section class="puzzle-clues">
-            <h3>Вопросы к кроссворду</h3>
-            <ul id="clues-list">
-                <!-- Сюда JavaScript вставит вопросы -->
-            </ul>
-        </section>
-    </main>
+            <section class="puzzle-clues">
+                <h3>Вопросы</h3>
+                <h4>По горизонтали</h4>
+                <ul id="across-clues"></ul>
+                <h4>По вертикали</h4>
+                <ul id="down-clues"></ul>
+            </section>
+        </div>
+    </div>
+</main>
 
-    <footer class="site-footer">
-        <p>© 2026 Сканворды онлайн</p>
-    </footer>
+<footer class="site-footer">
+    © 2024 Сканворд
+</footer>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
