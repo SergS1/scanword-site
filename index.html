@@ -12,12 +12,20 @@
 
 <main class="site-main">
     <div class="puzzle-layout">
-        <!-- Левая колонка: только сетка -->
+        <!-- Левая колонка: сетка -->
         <div class="puzzle-grid-wrapper">
             <div id="puzzle-grid" class="puzzle-grid"></div>
         </div>
 
-        <!-- Правая колонка -->
+        <!-- Средняя колонка: место под рекламный блок -->
+        <div class="puzzle-ad">
+            <div class="puzzle-ad-inner">
+                <!-- Здесь можно разместить рекламный баннер -->
+                Рекламный блок
+            </div>
+        </div>
+
+        <!-- Правая колонка: тема, кнопки, вопрос к слову -->
         <div class="puzzle-sidebar">
             <section class="puzzle-info">
                 <h2>Тема: Еда и напитки</h2>
@@ -31,17 +39,17 @@
                 <div id="result-message"></div>
             </section>
 
-            <!-- Блок выбранного вопроса -->
+            <!-- Блок выбранного вопроса (внизу справа) -->
             <section class="active-clue-panel">
                 <div class="active-clue-title">Вопрос к выбранному слову</div>
                 <div id="active-clue-text" class="active-clue-text">
-                    Выберите слово: нажмите на клетку в сетке или на вопрос справа.
+                    Выберите слово: нажмите на клетку в сетке или на вопрос в списке.
                 </div>
             </section>
         </div>
     </div>
 
-    <!-- Блок вопросов на всю ширину -->
+    <!-- Список всех вопросов на всю ширину экрана -->
     <section class="puzzle-clues puzzle-clues-full">
         <h3>Вопросы</h3>
         <h4>По горизонтали</h4>
