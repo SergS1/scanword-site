@@ -292,6 +292,15 @@ const puzzle = (function buildPuzzle() {
     return grid;
 })();
 
+// Быстрый доступ к подсказкам по номеру
+const clueByNumber = new Map();
+clues.forEach((clue) => {
+    clueByNumber.set(clue.number, clue);
+});
+
+// Текущий активный номер слова (для правильного направления перехода)
+let activeClueNumber = null;
+
 // -------------------------
 // 3. ЭЛЕМЕНТЫ СТРАНИЦЫ
 // -------------------------
@@ -329,6 +338,7 @@ function createPuzzleGrid() {
                 input.maxLength = 1;
                 input.dataset.answer = char;
 
+                // Ввод буквы + авто‑переход по направлению слова
                 input.addEventListener("input", (event) => {
                     const target = event.target;
                     target.value = target.value.toUpperCase();
@@ -339,6 +349,7 @@ function createPuzzleGrid() {
                     }
                 });
 
+                // Backspace: при пустой клетке переходим назад по слову
                 input.addEventListener("keydown", (event) => {
                     if (event.key === "Backspace" && !input.value) {
                         event.preventDefault();
@@ -346,6 +357,7 @@ function createPuzzleGrid() {
                     }
                 });
 
+                // Подсветка вопроса и слова при фокусе/клике
                 input.addEventListener("focus", () => {
                     highlightClueForCell(cell);
                 });
@@ -366,23 +378,64 @@ function createPuzzleGrid() {
 // -------------------------
 // 5. ПЕРЕХОДЫ МЕЖДУ КЛЕТКАМИ
 // -------------------------
-function getAllInputs() {
-    return Array.from(gridElement.querySelectorAll("input"));
-}
-
+// Переход вперёд по текущему слову (горизонтальному или вертикальному)
 function focusNextInput(currentInput) {
-    const inputs = getAllInputs();
-    const index = inputs.indexOf(currentInput);
-    if (index >= 0 && index < inputs.length - 1) {
-        inputs[index + 1].focus();
-    }
+    moveInActiveWord(currentInput, +1);
 }
 
+// Переход назад по текущему слову
 function focusPrevInput(currentInput) {
-    const inputs = getAllInputs();
-    const index = inputs.indexOf(currentInput);
-    if (index > 0) {
-        inputs[index - 1].focus();
+    moveInActiveWord(currentInput, -1);
+}
+
+// Переход по слову в зависимости от направления активной подсказки
+function moveInActiveWord(currentInput, step) {
+    const cell = currentInput.parentElement;
+    if (!cell) return;
+
+    const numsStr = cell.dataset.clueNumbers;
+    if (!numsStr) return;
+
+    const numbers = numsStr
+        .split(",")
+        .map((n) => parseInt(n, 10))
+        .filter((n) => !Number.isNaN(n));
+
+    if (!numbers.length) return;
+
+    // Если активное слово не задано или не совпадает с этой клеткой —
+    // берём первое слово из списка клетки
+    let clueNum = activeClueNumber;
+    if (!clueNum || !numbers.includes(clueNum)) {
+        clueNum = numbers[0];
+        activeClueNumber = clueNum;
+    }
+
+    const clue = clueByNumber.get(clueNum);
+    if (!clue) return;
+
+    const word = clue.answer;
+    const isHorizontal = clue.direction.toLowerCase().startsWith("гор");
+
+    // Собираем все input'ы в этом слове по порядку
+    const inputsInWord = [];
+    for (let i = 0; i < word.length; i++) {
+        const r = clue.row + (isHorizontal ? 0 : i);
+        const c = clue.col + (isHorizontal ? i : 0);
+        const cellEl = gridElement.querySelector(
+            `.puzzle-cell[data-row="${r}"][data-col="${c}"]`
+        );
+        if (!cellEl) continue;
+        const inputEl = cellEl.querySelector("input");
+        if (inputEl) inputsInWord.push(inputEl);
+    }
+
+    const index = inputsInWord.indexOf(currentInput);
+    if (index === -1) return;
+
+    const nextIndex = index + step;
+    if (nextIndex >= 0 && nextIndex < inputsInWord.length) {
+        inputsInWord[nextIndex].focus();
     }
 }
 
@@ -398,6 +451,7 @@ function addClueNumbers() {
         const startRow = clue.row;
         const startCol = clue.col;
 
+        // Номер в стартовой клетке слова
         const startSelector = `.puzzle-cell[data-row="${startRow}"][data-col="${startCol}"]`;
         const startCell = gridElement.querySelector(startSelector);
         if (startCell && !startCell.classList.contains("blocked")) {
@@ -409,6 +463,7 @@ function addClueNumbers() {
             }
         }
 
+        // Пометить все клетки слова его номером (для подсветки и навигации)
         for (let i = 0; i < word.length; i++) {
             const r = startRow + (isHorizontal ? 0 : i);
             const c = startCol + (isHorizontal ? i : 0);
@@ -427,7 +482,7 @@ function addClueNumbers() {
 }
 
 // -------------------------
-// 7. ПОДСВЕТКА ВОПРОСА И СЛОВА
+// 7. ПОДСВЕТКА ВОПРОСА И СЛОВА ДЛЯ КЛЕТКИ
 // -------------------------
 function highlightClueForCell(cell) {
     if (!cell || !cluesList) return;
@@ -437,6 +492,10 @@ function highlightClueForCell(cell) {
     const firstNum = parseInt(nums.split(",")[0], 10);
     if (Number.isNaN(firstNum)) return;
 
+    // Запоминаем активное слово для управления направлением
+    activeClueNumber = firstNum;
+
+    // Подсветка вопроса
     const items = cluesList.querySelectorAll("li");
     items.forEach((li) => {
         if (Number(li.dataset.number) === firstNum) {
@@ -446,9 +505,11 @@ function highlightClueForCell(cell) {
         }
     });
 
+    // Убрать старую подсветку слова
     const allCells = gridElement.querySelectorAll(".puzzle-cell.active-word");
     allCells.forEach((c) => c.classList.remove("active-word"));
 
+    // Подсветить все клетки выбранного слова
     const cells = gridElement.querySelectorAll(".puzzle-cell");
     cells.forEach((c) => {
         const data = c.dataset.clueNumbers;
@@ -469,7 +530,9 @@ function renderClues() {
     cluesList.innerHTML = "";
     clues.forEach((clue) => {
         const li = document.createElement("li");
-        li.textContent = `${clue.number}. ${clue.question}`;
+        const len = clue.answer ? clue.answer.length : 0;
+        // Добавляем количество букв после вопроса
+        li.textContent = `${clue.number}. ${clue.question} (${len} букв)`;
         li.dataset.number = String(clue.number);
         cluesList.appendChild(li);
     });
