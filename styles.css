@@ -1,50 +1,102 @@
 /* styles.css */
 
-/* Общие стили */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f5f5f5;
+/* Общие настройки */
+* {
+    box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    /* Голубой «красочный» фон */
+    background: linear-gradient(135deg, #87cefa, #1e90ff, #b0e0e6);
+    color: #222;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Шапка и подвал */
 .site-header, .site-footer {
-    background: #2c3e50;
+    background: rgba(0, 0, 0, 0.8);
     color: #fff;
     padding: 15px;
     text-align: center;
 }
 
-.site-main {
-    max-width: 960px;
-    margin: 20px auto;
-    padding: 0 10px;
+.site-header h1 {
+    margin: 0;
 }
 
-/* Сетка сканворда */
+.site-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+}
+
+/* Информация о кроссворде */
+.puzzle-info {
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 0 0 4px rgba(0,0,0,0.6);
+}
+
+/* Контейнер сетки и кнопок */
 .puzzle-container {
     display: flex;
-    gap: 20px;
     align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1400px;
 }
 
+/* Сетка кроссворда — чёрная рамка и сетка */
 .puzzle-grid {
     display: grid;
-    grid-template-columns: repeat(10, 30px); /* 10 колонок по 30px */
-    grid-auto-rows: 30px;
+    background: #000;
+    padding: 6px;
     gap: 2px;
-    background: #333;
-    padding: 2px;
+    border: 3px solid #000;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+
+    /* Базово — 20 колонок, JS переопределяет под фактический размер */
+    grid-template-columns: repeat(20, 1fr);
+    grid-auto-rows: 1fr;
+
+    /* Занимает большую часть экрана */
+    width: 90vmin;
+    max-width: 100%;
+    max-height: calc(100vh - 220px);
 }
 
 /* Клетка */
 .puzzle-cell {
-    background: #fff;
+    background: #ffffff;
     position: relative;
+    border: 1px solid #000000; /* чёрная сетка */
 }
 
 /* Закрашенная клетка (нет буквы) */
 .puzzle-cell.blocked {
-    background: #333;
+    background: #000000;
+}
+
+/* Номер слова в клетке */
+.clue-number {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 10px;
+    color: #000;
+    font-weight: bold;
+    pointer-events: none;
 }
 
 /* Поле для ввода буквы */
@@ -55,6 +107,14 @@ body {
     text-align: center;
     font-size: 18px;
     text-transform: uppercase;
+    background: transparent;
+    color: #000;
+}
+
+/* Фокус клетки */
+.puzzle-cell input:focus {
+    outline: none;
+    box-shadow: inset 0 0 6px 2px rgba(0, 255, 255, 0.7);
 }
 
 /* Ошибка */
@@ -69,7 +129,11 @@ body {
 
 /* Боковая панель с кнопками */
 .puzzle-controls {
-    min-width: 180px;
+    min-width: 190px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
 button {
@@ -79,4 +143,55 @@ button {
     padding: 8px;
     font-size: 14px;
     cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #2c3e50;
+    background: #2c3e50;
+    color: #fff;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #1b2733;
+}
+
+/* Сообщение о результате */
+#result-message {
+    min-height: 20px;
+    font-size: 14px;
+}
+
+/* Блок с вопросами */
+.puzzle-clues {
+    width: 100%;
+    max-width: 1400px;
+    background: rgba(255, 255, 255, 0.85);
+    margin-top: 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+.puzzle-clues h3 {
+    margin-top: 0;
+}
+
+.puzzle-clues ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.puzzle-clues li {
+    padding: 4px 6px;
+    border-bottom: 1px dashed rgba(0,0,0,0.15);
+}
+
+/* Подсветка выбранного вопроса зелёным полупрозрачным цветом */
+.puzzle-clues li.active-clue {
+    background: rgba(0, 255, 0, 0.3);
+}
+
+/* Подсветка всех клеток выбранного слова тем же зелёным цветом */
+.puzzle-cell.active-word input {
+    background: rgba(0, 255, 0, 0.3);
 }
