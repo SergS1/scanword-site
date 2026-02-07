@@ -3,46 +3,72 @@
 // -------------------------
 // 1. ДАННЫЕ СКАНВОРДА
 // -------------------------
-// # - закрашенная клетка (в нее вводить ничего не нужно)
-// Буква - правильный ответ в этой клетке
-// Все строки должны быть одной длины
 const puzzle = [
     "##########",
-    "#КОТ######",
-    "#О#СОБАКА#",
-    "#Т#О######",
-    "##########",
-    "###ЛЕВ####",
-    "###Е######",
-    "###В######",
+    "#######МЕД",
+    "####СУПО##",
+    "####А#ХЛЕБ",
+    "####Х#СОЛЬ",
+    "#Ч##А##К##",
+    "#А##Р#БОРЩ",
+    "#Й########",
     "##########",
     "##########"
 ];
+// В этой сетке зашиты слова:
+// по горизонтали: МЕД, СУП, ХЛЕБ, СОЛЬ, БОРЩ
+// по вертикали:   САХАР, МОЛОКО, ЧАЙ
 // -------------------------
 // 2. ВОПРОСЫ К СКАНВОРДУ
 // -------------------------
-// number    – номер вопроса
-// question  – текст вопроса
-// answer    – ответ (для тебя, можно не показывать пользователю)
-// direction – направление (для информации)
 const clues = [
     {
         number: 1,
-        question: "Домашнее животное, говорит «мяу» (по горизонтали)",
-        answer: "КОТ",
+        question: "Сладкий продукт пчеловодства, который кладут в чай (по горизонтали)",
+        answer: "МЕД",
         direction: "горизонтально"
     },
     {
         number: 2,
-        question: "Самое верное домашнее животное (по горизонтали)",
-        answer: "СОБАКА",
+        question: "Горячее первое блюдо в тарелке (по горизонтали)",
+        answer: "СУП",
         direction: "горизонтально"
     },
     {
         number: 3,
-        question: "Царь зверей (по горизонтали)",
-        answer: "ЛЕВ",
+        question: "Основной продукт, который пекут из муки и дрожжей (по горизонтали)",
+        answer: "ХЛЕБ",
         direction: "горизонтально"
+    },
+    {
+        number: 4,
+        question: "Белая приправа, без неё пресно, но с ней пересолено (по горизонтали)",
+        answer: "СОЛЬ",
+        direction: "горизонтально"
+    },
+    {
+        number: 5,
+        question: "Густой суп со свёклой и капустой (по горизонтали)",
+        answer: "БОРЩ",
+        direction: "горизонтально"
+    },
+    {
+        number: 6,
+        question: "Прозрачные сладкие кристаллики для чая (по вертикали)",
+        answer: "САХАР",
+        direction: "вертикально"
+    },
+    {
+        number: 7,
+        question: "Белый напиток из коровы (по вертикали)",
+        answer: "МОЛОКО",
+        direction: "вертикально"
+    },
+    {
+        number: 8,
+        question: "Горячий напиток из заваренных листьев (по вертикали)",
+        answer: "ЧАЙ",
+        direction: "вертикально"
     }
 ];
 // -------------------------
@@ -57,16 +83,13 @@ const cluesList = document.getElementById("clues-list");
 // 4. СОЗДАНИЕ СЕТКИ СКАНВОРДА
 // -------------------------
 function createPuzzleGrid() {
-    // Очистим сетку на всякий случай
     gridElement.innerHTML = "";
-    // Если пазл пустой — выходим
     if (!puzzle || puzzle.length === 0) {
         resultMessage.textContent = "Сканворд не найден.";
         return;
     }
     const rows = puzzle.length;
     const cols = puzzle[0].length;
-    // Делаем число колонок динамическим, чтобы не зависеть от CSS
     gridElement.style.gridTemplateColumns = `repeat(${cols}, 30px)`;
     for (let row = 0; row < rows; row++) {
         const line = puzzle[row];
@@ -77,34 +100,103 @@ function createPuzzleGrid() {
             cell.dataset.row = String(row);
             cell.dataset.col = String(col);
             if (char === "#") {
-                // Закрашенная (пустая) клетка
                 cell.classList.add("blocked");
             } else {
-                // Клетка с буквой — создаем поле ввода
                 const input = document.createElement("input");
                 input.type = "text";
                 input.maxLength = 1;
-                input.dataset.answer = char; // правильная буква
+                input.dataset.answer = char;
                 input.addEventListener("input", (event) => {
                     const target = event.target;
                     target.value = target.value.toUpperCase();
                     cell.classList.remove("wrong", "correct");
                     resultMessage.textContent = "";
+                    // после ввода буквы переходим к следующей
+                    if (target.value.length === 1) {
+                        focusNextInput(target);
+                    }
                 });
                 cell.appendChild(input);
             }
             gridElement.appendChild(cell);
         }
     }
+    addClueNumbers();
 }
 // -------------------------
-// 5. ВЫВОД ВОПРОСОВ НА СТРАНИЦУ
+// 5. ПЕРЕХОД К СЛЕДУЮЩЕЙ КЛЕТКЕ
+// -------------------------
+function focusNextInput(currentInput) {
+    const inputs = Array.from(gridElement.querySelectorAll("input"));
+    const index = inputs.indexOf(currentInput);
+    if (index >= 0 && index < inputs.length - 1) {
+        inputs[index + 1].focus();
+    }
+}
+// -------------------------
+// 6. НУМЕРАЦИЯ НАЧАЛ СЛОВ
+// -------------------------
+function addClueNumbers() {
+    if (!clues || clues.length === 0) return;
+    const rows = puzzle.length;
+    const cols = puzzle[0].length;
+    clues.forEach((clue) => {
+        const answer = clue.answer;
+        if (!answer || !answer.length) return;
+        const isHorizontal = clue.direction &&
+            clue.direction.toLowerCase().startsWith("гор");
+        let start = null;
+        if (isHorizontal) {
+            outer: for (let r = 0; r < rows; r++) {
+                for (let c = 0; c <= cols - answer.length; c++) {
+                    let ok = true;
+                    for (let i = 0; i < answer.length; i++) {
+                        if (puzzle[r][c + i] !== answer[i]) {
+                            ok = false;
+                            break;
+                        }
+                    }
+                    if (ok) {
+                        start = { row: r, col: c };
+                        break outer;
+                    }
+                }
+            }
+        } else {
+            outer: for (let c = 0; c < cols; c++) {
+                for (let r = 0; r <= rows - answer.length; r++) {
+                    let ok = true;
+                    for (let i = 0; i < answer.length; i++) {
+                        if (puzzle[r + i][c] !== answer[i]) {
+                            ok = false;
+                            break;
+                        }
+                    }
+                    if (ok) {
+                        start = { row: r, col: c };
+                        break outer;
+                    }
+                }
+            }
+        }
+        if (!start) return;
+        const selector = `.puzzle-cell[data-row="${start.row}"][data-col="${start.col}"]`;
+        const cell = gridElement.querySelector(selector);
+        if (!cell || cell.classList.contains("blocked")) return;
+        if (cell.querySelector(".clue-number")) return;
+        const numberLabel = document.createElement("span");
+        numberLabel.classList.add("clue-number");
+        numberLabel.textContent = clue.number;
+        cell.appendChild(numberLabel);
+    });
+}
+// -------------------------
+// 7. ВЫВОД ВОПРОСОВ НА СТРАНИЦУ
 // -------------------------
 function renderClues() {
     if (!cluesList || !clues || clues.length === 0) {
         return;
     }
-    // Очистить список
     cluesList.innerHTML = "";
     clues.forEach((clue) => {
         const li = document.createElement("li");
@@ -113,7 +205,7 @@ function renderClues() {
     });
 }
 // -------------------------
-// 6. ПРОВЕРКА ОТВЕТОВ
+// 8. ПРОВЕРКА ОТВЕТОВ
 // -------------------------
 function checkPuzzle() {
     const inputs = gridElement.querySelectorAll("input");
@@ -123,10 +215,8 @@ function checkPuzzle() {
         const cell = input.parentElement;
         const correctLetter = input.dataset.answer;
         const userLetter = (input.value || "").toUpperCase();
-        // Сбрасываем старую подсветку
         cell.classList.remove("wrong", "correct");
         if (!userLetter) {
-            // Пустую клетку учитываем как незаполненную
             allCorrect = false;
         } else if (userLetter === correctLetter) {
             cell.classList.add("correct");
@@ -146,7 +236,7 @@ function checkPuzzle() {
     }
 }
 // -------------------------
-// 7. ПОКАЗ ОТВЕТА
+// 9. ПОКАЗ ОТВЕТА
 // -------------------------
 function showAnswer() {
     const inputs = gridElement.querySelectorAll("input");
@@ -159,7 +249,7 @@ function showAnswer() {
     resultMessage.textContent = "Ответ показан.";
 }
 // -------------------------
-// 8. СТАРТ: СОЗДАНИЕ СЕТКИ И ВОПРОСОВ
+// 10. СТАРТ
 // -------------------------
 createPuzzleGrid();
 renderClues();
