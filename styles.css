@@ -275,7 +275,7 @@ button:hover {
     }
 
     .puzzle-cell input {
-        font-size: 18px;
+        font-size: 14px;
     }
 
     .clue-number {
@@ -286,5 +286,6 @@ button:hover {
         font-size: 18px;
     }
 }
+
 
 
