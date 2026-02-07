@@ -4,10 +4,8 @@
 // -------------------------
 // 1. КОНФИГУРАЦИЯ СЛОВ
 // -------------------------
-// row / col – начальная клетка слова (0-based)
-// direction: "горизонтально" или "вертикально"
 const clues = [
-    // Горизонтальные (1–15), слева
+    // Горизонтальные (1–15)
     {
         number: 1,
         answer: "ХЛЕБ",
@@ -129,7 +127,7 @@ const clues = [
         question: "Ароматный овощ, защищает от простуды и вампиров (по горизонтали)"
     },
 
-    // Вертикальные (16–30), справа, в отдельных колонках
+    // Вертикальные (16–30)
     {
         number: 16,
         answer: "САХАР",
@@ -312,7 +310,6 @@ function createPuzzleGrid() {
     const rows = puzzle.length;
     const cols = puzzle[0].length;
 
-    // Столько колонок, сколько нужно
     gridElement.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
     for (let row = 0; row < rows; row++) {
@@ -332,7 +329,6 @@ function createPuzzleGrid() {
                 input.maxLength = 1;
                 input.dataset.answer = char;
 
-                // Ввод буквы + авто‑переход вперёд
                 input.addEventListener("input", (event) => {
                     const target = event.target;
                     target.value = target.value.toUpperCase();
@@ -343,7 +339,6 @@ function createPuzzleGrid() {
                     }
                 });
 
-                // Backspace: при пустой клетке переходим назад
                 input.addEventListener("keydown", (event) => {
                     if (event.key === "Backspace" && !input.value) {
                         event.preventDefault();
@@ -351,7 +346,6 @@ function createPuzzleGrid() {
                     }
                 });
 
-                // Подсветка вопроса и слова при фокусе/клике
                 input.addEventListener("focus", () => {
                     highlightClueForCell(cell);
                 });
@@ -404,7 +398,6 @@ function addClueNumbers() {
         const startRow = clue.row;
         const startCol = clue.col;
 
-        // Номер в стартовой клетке слова
         const startSelector = `.puzzle-cell[data-row="${startRow}"][data-col="${startCol}"]`;
         const startCell = gridElement.querySelector(startSelector);
         if (startCell && !startCell.classList.contains("blocked")) {
@@ -416,7 +409,6 @@ function addClueNumbers() {
             }
         }
 
-        // Пометить все клетки слова его номером (для подсветки)
         for (let i = 0; i < word.length; i++) {
             const r = startRow + (isHorizontal ? 0 : i);
             const c = startCol + (isHorizontal ? i : 0);
@@ -435,18 +427,16 @@ function addClueNumbers() {
 }
 
 // -------------------------
-// 7. ПОДСВЕТКА ВОПРОСА И СЛОВА ДЛЯ КЛЕТКИ
+// 7. ПОДСВЕТКА ВОПРОСА И СЛОВА
 // -------------------------
 function highlightClueForCell(cell) {
     if (!cell || !cluesList) return;
     const nums = cell.dataset.clueNumbers;
     if (!nums) return;
 
-    // Берём первый номер (если клетка пересечения)
     const firstNum = parseInt(nums.split(",")[0], 10);
     if (Number.isNaN(firstNum)) return;
 
-    // Подсветка вопроса
     const items = cluesList.querySelectorAll("li");
     items.forEach((li) => {
         if (Number(li.dataset.number) === firstNum) {
@@ -456,11 +446,9 @@ function highlightClueForCell(cell) {
         }
     });
 
-    // Убрать старую подсветку слова
     const allCells = gridElement.querySelectorAll(".puzzle-cell.active-word");
     allCells.forEach((c) => c.classList.remove("active-word"));
 
-    // Подсветить все клетки выбранного слова
     const cells = gridElement.querySelectorAll(".puzzle-cell");
     cells.forEach((c) => {
         const data = c.dataset.clueNumbers;
