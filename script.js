@@ -454,7 +454,7 @@ function checkPuzzle() {
     if (!resultMessage) return;
     if (!hasAnyLetter) resultMessage.textContent = "Заполните хотя бы одну букву.";
     else if (allCorrect) resultMessage.textContent = "Отлично! Все правильно.";
-    else resultMessage.textContent = "Есть ошибки или пустые клетки.";
+    else resultMessage.textContent = "";
 }
 
 // -------------------------
