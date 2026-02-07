@@ -8,12 +8,12 @@ const PUZZLE_LIST = [
     {
         id: "food-1",
         title: "Сканворд №1: Еда и напитки",
-        file: "puzzles/food-1.json"
+        file: "food-1.json"
     },
     {
         id: "animals-1",
         title: "Сканворд №2: Животные",
-        file: "puzzles/animals-1.json"
+        file: "animals-1.json"
     }
 ];
 
