@@ -1,0 +1,82 @@
+/* styles.css */
+
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f5f5f5;
+}
+
+.site-header, .site-footer {
+    background: #2c3e50;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+.site-main {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 0 10px;
+}
+
+/* Сетка сканворда */
+.puzzle-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 30px); /* 10 колонок по 30px */
+    grid-auto-rows: 30px;
+    gap: 2px;
+    background: #333;
+    padding: 2px;
+}
+
+/* Клетка */
+.puzzle-cell {
+    background: #fff;
+    position: relative;
+}
+
+/* Закрашенная клетка (нет буквы) */
+.puzzle-cell.blocked {
+    background: #333;
+}
+
+/* Поле для ввода буквы */
+.puzzle-cell input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+/* Ошибка */
+.puzzle-cell.wrong input {
+    background: #ffcccc;
+}
+
+/* Правильно */
+.puzzle-cell.correct input {
+    background: #ccffcc;
+}
+
+/* Боковая панель с кнопками */
+.puzzle-controls {
+    min-width: 180px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}

@@ -1,0 +1,40 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Сканворды онлайн</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Сканворды онлайн</h1>
+        <p>Решайте сканворды прямо в браузере</p>
+    </header>
+
+    <main class="site-main">
+        <section class="puzzle-info">
+            <h2>Сканворд №1</h2>
+            <p>Тема: Животные</p>
+        </section>
+
+        <section class="puzzle-container">
+            <div id="puzzle-grid" class="puzzle-grid">
+                <!-- Сюда JavaScript вставит клетки сканворда -->
+            </div>
+
+            <aside class="puzzle-controls">
+                <button id="btn-check">Проверить</button>
+                <button id="btn-show-answer">Показать ответ</button>
+                <p id="result-message"></p>
+            </aside>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 Сканворды онлайн</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
