@@ -6,248 +6,38 @@
 // -------------------------
 const clues = [
     // Горизонтальные (1–15)
-    {
-        number: 1,
-        answer: "ХЛЕБ",
-        direction: "горизонтально",
-        row: 0,
-        col: 0,
-        question: "Основной хлебобулочный продукт из муки и дрожжей (по горизонтали)"
-    },
-    {
-        number: 2,
-        answer: "МОЛОКО",
-        direction: "горизонтально",
-        row: 1,
-        col: 0,
-        question: "Белый напиток, который часто пьют по утрам (по горизонтали)"
-    },
-    {
-        number: 3,
-        answer: "СЫР",
-        direction: "горизонтально",
-        row: 2,
-        col: 0,
-        question: "Твёрдый молочный продукт, который кладут на бутерброд (по горизонтали)"
-    },
-    {
-        number: 4,
-        answer: "ЯБЛОКО",
-        direction: "горизонтально",
-        row: 3,
-        col: 0,
-        question: "Красный или зелёный фрукт, любимый врачами (по горизонтали)"
-    },
-    {
-        number: 5,
-        answer: "ГРУША",
-        direction: "горизонтально",
-        row: 4,
-        col: 0,
-        question: "Фрукт грушевидной формы, сладкий и сочный (по горизонтали)"
-    },
-    {
-        number: 6,
-        answer: "БАНАН",
-        direction: "горизонтально",
-        row: 5,
-        col: 0,
-        question: "Жёлтый длинный фрукт из тёплых стран (по горизонтали)"
-    },
-    {
-        number: 7,
-        answer: "АПЕЛЬСИН",
-        direction: "горизонтально",
-        row: 6,
-        col: 0,
-        question: "Круглый цитрусовый фрукт оранжевого цвета (по горизонтали)"
-    },
-    {
-        number: 8,
-        answer: "КЛУБНИКА",
-        direction: "горизонтально",
-        row: 7,
-        col: 0,
-        question: "Красная садовая ягода с семечками на поверхности (по горизонтали)"
-    },
-    {
-        number: 9,
-        answer: "ОГУРЕЦ",
-        direction: "горизонтально",
-        row: 8,
-        col: 0,
-        question: "Зелёный овощ, который часто солят в банках (по горизонтали)"
-    },
-    {
-        number: 10,
-        answer: "ПОМИДОР",
-        direction: "горизонтально",
-        row: 9,
-        col: 0,
-        question: "Красный овощ, из которого делают сок и кетчуп (по горизонтали)"
-    },
-    {
-        number: 11,
-        answer: "КАРТОФЕЛЬ",
-        direction: "горизонтально",
-        row: 10,
-        col: 0,
-        question: "Корнеплод, из которого делают пюре и фри (по горизонтали)"
-    },
-    {
-        number: 12,
-        answer: "МОРКОВЬ",
-        direction: "горизонтально",
-        row: 11,
-        col: 0,
-        question: "Оранжевый корнеплод, любят кролики (по горизонтали)"
-    },
-    {
-        number: 13,
-        answer: "КАПУСТА",
-        direction: "горизонтально",
-        row: 12,
-        col: 0,
-        question: "Листовой овощ, из которого делают щи (по горизонтали)"
-    },
-    {
-        number: 14,
-        answer: "ЛУК",
-        direction: "горизонтально",
-        row: 13,
-        col: 0,
-        question: "Овощ, от которого слезятся глаза (по горизонтали)"
-    },
-    {
-        number: 15,
-        answer: "ЧЕСНОК",
-        direction: "горизонтально",
-        row: 14,
-        col: 0,
-        question: "Ароматный овощ, защищает от простуды и вампиров (по горизонтали)"
-    },
+    { number: 1, answer: "ХЛЕБ", direction: "горизонтально", row: 0, col: 0, question: "Основной хлебобулочный продукт из муки и дрожжей (по горизонтали)" },
+    { number: 2, answer: "МОЛОКО", direction: "горизонтально", row: 1, col: 0, question: "Белый напиток, который часто пьют по утрам (по горизонтали)" },
+    { number: 3, answer: "СЫР", direction: "горизонтально", row: 2, col: 0, question: "Твёрдый молочный продукт, который кладут на бутерброд (по горизонтали)" },
+    { number: 4, answer: "ЯБЛОКО", direction: "горизонтально", row: 3, col: 0, question: "Красный или зелёный фрукт, любимый врачами (по горизонтали)" },
+    { number: 5, answer: "ГРУША", direction: "горизонтально", row: 4, col: 0, question: "Фрукт грушевидной формы, сладкий и сочный (по горизонтали)" },
+    { number: 6, answer: "БАНАН", direction: "горизонтально", row: 5, col: 0, question: "Жёлтый длинный фрукт из тёплых стран (по горизонтали)" },
+    { number: 7, answer: "АПЕЛЬСИН", direction: "горизонтально", row: 6, col: 0, question: "Круглый цитрусовый фрукт оранжевого цвета (по горизонтали)" },
+    { number: 8, answer: "КЛУБНИКА", direction: "горизонтально", row: 7, col: 0, question: "Красная садовая ягода с семечками на поверхности (по горизонтали)" },
+    { number: 9, answer: "ОГУРЕЦ", direction: "горизонтально", row: 8, col: 0, question: "Зелёный овощ, который часто солят в банках (по горизонтали)" },
+    { number: 10, answer: "ПОМИДОР", direction: "горизонтально", row: 9, col: 0, question: "Красный овощ, из которого делают сок и кетчуп (по горизонтали)" },
+    { number: 11, answer: "КАРТОФЕЛЬ", direction: "горизонтально", row: 10, col: 0, question: "Корнеплод, из которого делают пюре и фри (по горизонтали)" },
+    { number: 12, answer: "МОРКОВЬ", direction: "горизонтально", row: 11, col: 0, question: "Оранжевый корнеплод, любят кролики (по горизонтали)" },
+    { number: 13, answer: "КАПУСТА", direction: "горизонтально", row: 12, col: 0, question: "Листовой овощ, из которого делают щи (по горизонтали)" },
+    { number: 14, answer: "ЛУК", direction: "горизонтально", row: 13, col: 0, question: "Овощ, от которого слезятся глаза (по горизонтали)" },
+    { number: 15, answer: "ЧЕСНОК", direction: "горизонтально", row: 14, col: 0, question: "Ароматный овощ, защищает от простуды и вампиров (по горизонтали)" },
 
     // Вертикальные (16–30)
-    {
-        number: 16,
-        answer: "САХАР",
-        direction: "вертикально",
-        row: 0,
-        col: 11,
-        question: "Сладкие белые кристаллики для чая и кофе (по вертикали)"
-    },
-    {
-        number: 17,
-        answer: "СОЛЬ",
-        direction: "вертикально",
-        row: 0,
-        col: 12,
-        question: "Белая приправа, без неё пресно, но с ней пересолено (по вертикали)"
-    },
-    {
-        number: 18,
-        answer: "ПЕРЕЦ",
-        direction: "вертикально",
-        row: 0,
-        col: 13,
-        question: "Острая или сладкая приправа, бывает чёрный и красный (по вертикали)"
-    },
-    {
-        number: 19,
-        answer: "МАСЛО",
-        direction: "вертикально",
-        row: 0,
-        col: 14,
-        question: "Жирный продукт, который намазывают на хлеб (по вертикали)"
-    },
-    {
-        number: 20,
-        answer: "КАША",
-        direction: "вертикально",
-        row: 0,
-        col: 15,
-        question: "Горячее блюдо из крупы, полезный завтрак (по вертикали)"
-    },
-    {
-        number: 21,
-        answer: "СУП",
-        direction: "вертикально",
-        row: 0,
-        col: 16,
-        question: "Горячее первое блюдо в тарелке (по вертикали)"
-    },
-    {
-        number: 22,
-        answer: "БОРЩ",
-        direction: "вертикально",
-        row: 0,
-        col: 17,
-        question: "Густой суп со свёклой и капустой (по вертикали)"
-    },
-    {
-        number: 23,
-        answer: "ПЕЛЬМЕНИ",
-        direction: "вертикально",
-        row: 0,
-        col: 18,
-        question: "Маленькие варёные изделия из теста с мясной начинкой (по вертикали)"
-    },
-    {
-        number: 24,
-        answer: "ВАРЕНИКИ",
-        direction: "вертикально",
-        row: 0,
-        col: 19,
-        question: "Мучное блюдо, похоже на пельмени, но с творогом или ягодами (по вертикали)"
-    },
-    {
-        number: 25,
-        answer: "КОМПОТ",
-        direction: "вертикально",
-        row: 8,
-        col: 11,
-        question: "Сладкий напиток из сваренных фруктов или ягод (по вертикали)"
-    },
-    {
-        number: 26,
-        answer: "ЧАЙ",
-        direction: "вертикально",
-        row: 8,
-        col: 12,
-        question: "Горячий напиток из заваренных листьев (по вертикали)"
-    },
-    {
-        number: 27,
-        answer: "КОФЕ",
-        direction: "вертикально",
-        row: 8,
-        col: 13,
-        question: "Бодрящий тёмный напиток, его пьют утром (по вертикали)"
-    },
-    {
-        number: 28,
-        answer: "СОК",
-        direction: "вертикально",
-        row: 8,
-        col: 14,
-        question: "Напиток, который получают из фруктов или овощей (по вертикали)"
-    },
-    {
-        number: 29,
-        answer: "ЙОГУРТ",
-        direction: "вертикально",
-        row: 8,
-        col: 15,
-        question: "Густой кисломолочный напиток с ягодами или фруктами (по вертикали)"
-    },
-    {
-        number: 30,
-        answer: "МОРОЖЕНОЕ",
-        direction: "вертикально",
-        row: 8,
-        col: 16,
-        question: "Холодный десерт в рожке или стаканчике (по вертикали)"
-    }
+    { number: 16, answer: "САХАР", direction: "вертикально", row: 0, col: 11, question: "Сладкие белые кристаллики для чая и кофе (по вертикали)" },
+    { number: 17, answer: "СОЛЬ", direction: "вертикально", row: 0, col: 12, question: "Белая приправа, без неё пресно, но с ней пересолено (по вертикали)" },
+    { number: 18, answer: "ПЕРЕЦ", direction: "вертикально", row: 0, col: 13, question: "Острая или сладкая приправа, бывает чёрный и красный (по вертикали)" },
+    { number: 19, answer: "МАСЛО", direction: "вертикально", row: 0, col: 14, question: "Жирный продукт, который намазывают на хлеб (по вертикали)" },
+    { number: 20, answer: "КАША", direction: "вертикально", row: 0, col: 15, question: "Горячее блюдо из крупы, полезный завтрак (по вертикали)" },
+    { number: 21, answer: "СУП", direction: "вертикально", row: 0, col: 16, question: "Горячее первое блюдо в тарелке (по вертикали)" },
+    { number: 22, answer: "БОРЩ", direction: "вертикально", row: 0, col: 17, question: "Густой суп со свёклой и капустой (по вертикали)" },
+    { number: 23, answer: "ПЕЛЬМЕНИ", direction: "вертикально", row: 0, col: 18, question: "Маленькие варёные изделия из теста с мясной начинкой (по вертикали)" },
+    { number: 24, answer: "ВАРЕНИКИ", direction: "вертикально", row: 0, col: 19, question: "Мучное блюдо, похоже на пельмени, но с творогом или ягодами (по вертикали)" },
+    { number: 25, answer: "КОМПОТ", direction: "вертикально", row: 8, col: 11, question: "Сладкий напиток из сваренных фруктов или ягод (по вертикали)" },
+    { number: 26, answer: "ЧАЙ", direction: "вертикально", row: 8, col: 12, question: "Горячий напиток из заваренных листьев (по вертикали)" },
+    { number: 27, answer: "КОФЕ", direction: "вертикально", row: 8, col: 13, question: "Бодрящий тёмный напиток, его пьют утром (по вертикали)" },
+    { number: 28, answer: "СОК", direction: "вертикально", row: 8, col: 14, question: "Напиток, который получают из фруктов или овощей (по вертикали)" },
+    { number: 29, answer: "ЙОГУРТ", direction: "вертикально", row: 8, col: 15, question: "Густой кисломолочный напиток с ягодами или фруктами (по вертикали)" },
+    { number: 30, answer: "МОРОЖЕНОЕ", direction: "вертикально", row: 8, col: 16, question: "Холодный десерт в рожке или стаканчике (по вертикали)" }
 ];
 
 // Размер сетки
@@ -258,13 +48,12 @@ const GRID_COLS = 20;
 // 2. ПОСТРОЕНИЕ СЕТКИ БУКВ
 // -------------------------
 const puzzle = (function buildPuzzle() {
-    const grid = Array.from({ length: GRID_ROWS }, () =>
-        Array(GRID_COLS).fill("#")
-    );
+    const grid = Array.from({ length: GRID_ROWS }, () => Array(GRID_COLS).fill("#"));
 
     clues.forEach((clue) => {
         const word = clue.answer.toUpperCase();
         clue.answer = word;
+
         const isHorizontal = clue.direction.toLowerCase().startsWith("гор");
         const r0 = clue.row;
         const c0 = clue.col;
@@ -294,9 +83,7 @@ const puzzle = (function buildPuzzle() {
 
 // Быстрый доступ к подсказкам по номеру
 const clueByNumber = new Map();
-clues.forEach((clue) => {
-    clueByNumber.set(clue.number, clue);
-});
+clues.forEach((clue) => clueByNumber.set(clue.number, clue));
 
 // Текущий активный номер слова (для правильного направления перехода)
 let activeClueNumber = null;
@@ -306,7 +93,7 @@ let activeClueNumber = null;
 // -------------------------
 const gridElement = document.getElementById("puzzle-grid");
 const btnCheck = document.getElementById("btn-check");
-const btnShowAnswer = document.getElementById("btn-show-answer");
+const btnHint = document.getElementById("btn-hint"); // <-- вместо btn-show-answer
 const resultMessage = document.getElementById("result-message");
 const cluesList = document.getElementById("clues-list");
 
@@ -338,7 +125,6 @@ function createPuzzleGrid() {
                 input.maxLength = 1;
                 input.dataset.answer = char;
 
-                // Ввод буквы + авто‑переход по направлению слова
                 input.addEventListener("input", (event) => {
                     const target = event.target;
                     target.value = target.value.toUpperCase();
@@ -349,7 +135,6 @@ function createPuzzleGrid() {
                     }
                 });
 
-                // Backspace: при пустой клетке переходим назад по слову
                 input.addEventListener("keydown", (event) => {
                     if (event.key === "Backspace" && !input.value) {
                         event.preventDefault();
@@ -357,13 +142,8 @@ function createPuzzleGrid() {
                     }
                 });
 
-                // Подсветка вопроса и слова при фокусе/клике
-                input.addEventListener("focus", () => {
-                    highlightClueForCell(cell);
-                });
-                input.addEventListener("click", () => {
-                    highlightClueForCell(cell);
-                });
+                input.addEventListener("focus", () => highlightClueForCell(cell));
+                input.addEventListener("click", () => highlightClueForCell(cell));
 
                 cell.appendChild(input);
             }
@@ -378,17 +158,14 @@ function createPuzzleGrid() {
 // -------------------------
 // 5. ПЕРЕХОДЫ МЕЖДУ КЛЕТКАМИ
 // -------------------------
-// Переход вперёд по текущему слову (горизонтальному или вертикальному)
 function focusNextInput(currentInput) {
     moveInActiveWord(currentInput, +1);
 }
 
-// Переход назад по текущему слову
 function focusPrevInput(currentInput) {
     moveInActiveWord(currentInput, -1);
 }
 
-// Переход по слову в зависимости от направления активной подсказки
 function moveInActiveWord(currentInput, step) {
     const cell = currentInput.parentElement;
     if (!cell) return;
@@ -403,8 +180,6 @@ function moveInActiveWord(currentInput, step) {
 
     if (!numbers.length) return;
 
-    // Если активное слово не задано или не совпадает с этой клеткой —
-    // берём первое слово из списка клетки
     let clueNum = activeClueNumber;
     if (!clueNum || !numbers.includes(clueNum)) {
         clueNum = numbers[0];
@@ -417,7 +192,6 @@ function moveInActiveWord(currentInput, step) {
     const word = clue.answer;
     const isHorizontal = clue.direction.toLowerCase().startsWith("гор");
 
-    // Собираем все input'ы в этом слове по порядку
     const inputsInWord = [];
     for (let i = 0; i < word.length; i++) {
         const r = clue.row + (isHorizontal ? 0 : i);
@@ -451,7 +225,6 @@ function addClueNumbers() {
         const startRow = clue.row;
         const startCol = clue.col;
 
-        // Номер в стартовой клетке слова
         const startSelector = `.puzzle-cell[data-row="${startRow}"][data-col="${startCol}"]`;
         const startCell = gridElement.querySelector(startSelector);
         if (startCell && !startCell.classList.contains("blocked")) {
@@ -463,7 +236,6 @@ function addClueNumbers() {
             }
         }
 
-        // Пометить все клетки слова его номером (для подсветки и навигации)
         for (let i = 0; i < word.length; i++) {
             const r = startRow + (isHorizontal ? 0 : i);
             const c = startCol + (isHorizontal ? i : 0);
@@ -492,30 +264,22 @@ function highlightClueForCell(cell) {
     const firstNum = parseInt(nums.split(",")[0], 10);
     if (Number.isNaN(firstNum)) return;
 
-    // Запоминаем активное слово для управления направлением
     activeClueNumber = firstNum;
 
-    // Подсветка вопроса
     const items = cluesList.querySelectorAll("li");
     items.forEach((li) => {
-        if (Number(li.dataset.number) === firstNum) {
-            li.classList.add("active-clue");
-        } else {
-            li.classList.remove("active-clue");
-        }
+        if (Number(li.dataset.number) === firstNum) li.classList.add("active-clue");
+        else li.classList.remove("active-clue");
     });
 
-    // Убрать старую подсветку слова
     const allCells = gridElement.querySelectorAll(".puzzle-cell.active-word");
     allCells.forEach((c) => c.classList.remove("active-word"));
 
-    // Подсветить все клетки выбранного слова
     const cells = gridElement.querySelectorAll(".puzzle-cell");
     cells.forEach((c) => {
         const data = c.dataset.clueNumbers;
         if (!data) return;
-        const arr = data.split(",");
-        if (arr.includes(String(firstNum))) {
+        if (data.split(",").includes(String(firstNum))) {
             c.classList.add("active-word");
         }
     });
@@ -531,9 +295,23 @@ function renderClues() {
     clues.forEach((clue) => {
         const li = document.createElement("li");
         const len = clue.answer ? clue.answer.length : 0;
-        // Добавляем количество букв после вопроса
         li.textContent = `${clue.number}. ${clue.question} (${len} букв)`;
         li.dataset.number = String(clue.number);
+
+        // клик по вопросу: делаем слово активным и фокус на первую клетку
+        li.addEventListener("click", () => {
+            activeClueNumber = clue.number;
+
+            // подсветить так же, как при фокусе клетки
+            const startCell = gridElement.querySelector(
+                `.puzzle-cell[data-row="${clue.row}"][data-col="${clue.col}"]`
+            );
+            if (startCell) highlightClueForCell(startCell);
+
+            const startInput = startCell?.querySelector("input");
+            if (startInput) startInput.focus();
+        });
+
         cluesList.appendChild(li);
     });
 }
@@ -567,29 +345,74 @@ function checkPuzzle() {
 
     if (!resultMessage) return;
 
-    if (!hasAnyLetter) {
-        resultMessage.textContent = "Заполните хотя бы одну букву.";
-    } else if (allCorrect) {
-        resultMessage.textContent = "Отлично! Все правильно.";
-    } else {
-        resultMessage.textContent = "Есть ошибки или пустые клетки.";
-    }
+    if (!hasAnyLetter) resultMessage.textContent = "Заполните хотя бы одну букву.";
+    else if (allCorrect) resultMessage.textContent = "Отлично! Все правильно.";
+    else resultMessage.textContent = "Есть ошибки или пустые клетки.";
 }
 
 // -------------------------
-// 10. ПОКАЗ ОТВЕТА
+// 10. ПОДСКАЗКА (15% букв активного слова)
 // -------------------------
-function showAnswer() {
-    const inputs = gridElement.querySelectorAll("input");
-    inputs.forEach((input) => {
-        input.value = input.dataset.answer || "";
-        const cell = input.parentElement;
-        cell.classList.remove("wrong");
-        cell.classList.add("correct");
-    });
-    if (resultMessage) {
-        resultMessage.textContent = "Ответ показан.";
+function hintActiveWord() {
+    if (!resultMessage) return;
+
+    if (!activeClueNumber) {
+        resultMessage.textContent = "Выберите слово: нажмите на вопрос или на клетку слова.";
+        return;
     }
+
+    const clue = clueByNumber.get(activeClueNumber);
+    if (!clue) {
+        resultMessage.textContent = "Не удалось определить активное слово.";
+        return;
+    }
+
+    const word = clue.answer;
+    const isHorizontal = clue.direction.toLowerCase().startsWith("гор");
+    const len = word.length;
+
+    const revealCount = Math.max(1, Math.round(len * 0.15));
+
+    // Собираем позиции, где буква не совпадает с правильной (или пусто)
+    const candidates = [];
+    for (let i = 0; i < len; i++) {
+        const r = clue.row + (isHorizontal ? 0 : i);
+        const c = clue.col + (isHorizontal ? i : 0);
+        const cellEl = gridElement.querySelector(
+            `.puzzle-cell[data-row="${r}"][data-col="${c}"]`
+        );
+        const inputEl = cellEl?.querySelector("input");
+        if (!cellEl || !inputEl) continue;
+
+        const correct = word[i].toUpperCase();
+        const current = (inputEl.value || "").toUpperCase();
+
+        if (current !== correct) candidates.push({ cellEl, inputEl, correct });
+    }
+
+    if (candidates.length === 0) {
+        resultMessage.textContent = "В этом слове уже все буквы правильные.";
+        return;
+    }
+
+    shuffle(candidates);
+
+    const toReveal = candidates.slice(0, Math.min(revealCount, candidates.length));
+    toReveal.forEach(({ cellEl, inputEl, correct }) => {
+        inputEl.value = correct;
+        cellEl.classList.remove("wrong");
+        cellEl.classList.add("correct");
+    });
+
+    resultMessage.textContent = `Подсказка: открыто ${toReveal.length} буквы(а) в слове №${activeClueNumber}.`;
+}
+
+function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
 }
 
 // -------------------------
@@ -598,9 +421,5 @@ function showAnswer() {
 createPuzzleGrid();
 renderClues();
 
-if (btnCheck) {
-    btnCheck.addEventListener("click", checkPuzzle);
-}
-if (btnShowAnswer) {
-    btnShowAnswer.addEventListener("click", showAnswer);
-}
+if (btnCheck) btnCheck.addEventListener("click", checkPuzzle);
+if (btnHint) btnHint.addEventListener("click", hintActiveWord);
