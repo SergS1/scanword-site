@@ -4,26 +4,6 @@
     <meta charset="UTF-8">
     <title>Сканворды онлайн</title>
     <link rel="stylesheet" href="styles.css">
-
-    <style>
-        .puzzle-cell {
-            position: relative;
-        }
-
-        .clue-number {
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            font-size: 10px;
-            color: #333;
-            font-weight: bold;
-            pointer-events: none; /* чтобы клик шёл по клетке/инпуту */
-        }
-    </style>
-</head>
-    <meta charset="UTF-8">
-    <title>Сканворды онлайн</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="site-header">
@@ -35,12 +15,13 @@
         <section class="puzzle-info">
             <h2>Сканворд №1</h2>
             <p>Тема: Еда и напитки</p>
-            <p>В этом сканворде 8 слов. Вопросы смотрите ниже.</p>
+            <p>В этом кроссворде 30 слов по горизонтали и вертикали.</p>
+            <p>Вводите буквы в клетки — курсор сам переходит к следующей.</p>
         </section>
 
         <section class="puzzle-container">
             <div id="puzzle-grid" class="puzzle-grid">
-                <!-- Сюда JavaScript вставит клетки сканворда -->
+                <!-- Сюда JavaScript вставит клетки кроссворда -->
             </div>
 
             <aside class="puzzle-controls">
@@ -51,7 +32,7 @@
         </section>
 
         <section class="puzzle-clues">
-            <h3>Вопросы к сканворду</h3>
+            <h3>Вопросы к кроссворду</h3>
             <ul id="clues-list">
                 <!-- Сюда JavaScript вставит вопросы -->
             </ul>
