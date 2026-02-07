@@ -34,12 +34,13 @@ body {
     padding: 10px 20px;
 }
 
-/* Основной двухколоночный лэйаут */
+/* Основной двухколоночный лэйаут:
+   первая колонка "обнимает" кроссворд максимально плотно */
 .puzzle-layout {
     flex: 1;
     display: grid;
-    grid-template-columns: auto minmax(320px, 420px);
-    gap: 30px;
+    grid-template-columns: max-content minmax(320px, 420px);
+    gap: 10px; /* минимальный зазор между сеткой и блоками справа */
     align-items: flex-start;
 }
 
@@ -231,8 +232,8 @@ button:hover {
 /* Планшеты */
 @media (max-width: 1024px) {
     .puzzle-layout {
-        grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
-        gap: 20px;
+        grid-template-columns: max-content minmax(300px, 0.9fr);
+        gap: 10px;
     }
 
     .puzzle-grid {
